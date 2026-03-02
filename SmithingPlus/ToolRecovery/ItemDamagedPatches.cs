@@ -1,7 +1,7 @@
 using System.Linq;
 using HarmonyLib;
 using JetBrains.Annotations;
-using SmithingPlus.Metal;
+using SmithingPlus.Common.Metal;
 using SmithingPlus.Util;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
@@ -36,7 +36,7 @@ public class ItemDamagedPatches
         if (repairedStack == null) return;
         repairedStack.ResolveBlockOrItem((allInputslots.FirstOrDefault()?.Inventory?.Api ?? Core.Api)
             .World);
-        if (repairedStack.Collectible.Code != byRecipe.Output.ResolvedItemstack.Collectible.Code) return;
+        if (repairedStack.Collectible.Code != byRecipe.Output?.ResolvedItemStack?.Collectible.Code) return;
         foreach (var attributeKey in Core.Config.GetToolRepairForgettableAttributes)
             repairedStack.Attributes?.RemoveAttribute(attributeKey);
         var repairSmith = brokenStack.GetRepairSmith();
@@ -119,11 +119,11 @@ public class ItemDamagedPatches
         var toolRecipe = itemStack
             .GetGridRecipes(api)
             .FirstOrDefault(r =>
-                r.Output?.ResolvedItemstack?.StackSize == 1);
-        var toolHead = toolRecipe?.resolvedIngredients
+                r.Output?.ResolvedItemStack?.StackSize == 1);
+        var toolHead = toolRecipe?.RecipeIngredients
             .FirstOrDefault(k =>
-                k?.ResolvedItemstack?.Collectible?.HasBehavior<CollectibleBehaviorRepairableToolHead>() ?? false)
-            ?.ResolvedItemstack;
+                k?.ResolvedItemStack?.Collectible?.HasBehavior<CollectibleBehaviorRepairableToolHead>() ?? false)
+            ?.ResolvedItemStack;
         if (toolHead == null)
         {
             toolHead = itemStack;

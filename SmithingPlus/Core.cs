@@ -5,6 +5,7 @@ using SmithingPlus.BitsRecovery;
 using SmithingPlus.CastingTweaks;
 using SmithingPlus.ClientTweaks;
 using SmithingPlus.Common;
+using SmithingPlus.Common.Metal;
 using SmithingPlus.Config;
 using SmithingPlus.Metal;
 using SmithingPlus.SmithWithBits;

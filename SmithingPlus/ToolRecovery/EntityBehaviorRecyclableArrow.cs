@@ -1,3 +1,4 @@
+using SmithingPlus.Common.Metal;
 using SmithingPlus.Metal;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
