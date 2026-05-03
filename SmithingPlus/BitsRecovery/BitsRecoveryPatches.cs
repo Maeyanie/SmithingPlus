@@ -1,7 +1,7 @@
 using System;
 using HarmonyLib;
 using JetBrains.Annotations;
-using SmithingPlus.Metal;
+using SmithingPlus.Common.Metal;
 using SmithingPlus.Util;
 using Vintagestory.API.Common;
 using Vintagestory.API.MathTools;
@@ -41,6 +41,7 @@ public class BitsRecoveryPatches
             Core.Logger.VerboseDebug("[BitsRecovery] Non-metal voxel type: {0}", voxelType);
             return;
         }
+
         RecoverBitsFromWorkItem(__instance, byPlayer, workItemStack);
     }
 

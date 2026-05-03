@@ -9,7 +9,6 @@ namespace SmithingPlus.StoneSmithing;
 [HarmonyPatch(typeof(AnvilWorkItemRenderer), nameof(AnvilWorkItemRenderer.RegenMesh))]
 public static class RegenMeshPostfixPatch
 {
-    [HarmonyPostfix]
     public static void RegenMesh_Postfix(
         AnvilWorkItemRenderer __instance,
         ref MeshRef ___workItemMeshRef,
@@ -28,8 +27,7 @@ public static class RegenMeshPostfixPatch
         ___recipeOutlineMeshRef?.Dispose();
         ___workItemMeshRef = null;
         ___recipeOutlineMeshRef = null;
-        var workItemMeshData = ItemWorkItem.GenMesh(___api, workitemStack, voxels, out var texId);
-        ___texId = texId;
+        var workItemMeshData = ItemWorkItem.GenMesh(___api, workitemStack, voxels);
         var recipeOutlineMeshData = GenOutlineMesh(___api, recipeToOutlineVoxels, voxels);
         for (var i = 0; i < workItemMeshData.xyz.Length; i += 3)
             workItemMeshData.xyz[i + 1] += yOffset;

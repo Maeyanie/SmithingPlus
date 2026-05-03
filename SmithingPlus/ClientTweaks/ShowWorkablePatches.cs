@@ -34,13 +34,13 @@ public class ShowWorkablePatches
     public static void Postfix_BlockEntityForge_GetBlockInfo(BlockEntityForge __instance, IPlayer forPlayer,
         StringBuilder dsc)
     {
-        if (__instance.Contents == null) return;
+        if (__instance.WorkItemStack == null) return;
         var temperature =
-            (int)__instance.Contents.Collectible.GetTemperature(__instance.Api.World, __instance.Contents);
-        var workableTemp = __instance.Contents.GetWorkableTemperature();
+            (int)__instance.WorkItemStack.Collectible.GetTemperature(__instance.Api.World, __instance.WorkItemStack);
+        var workableTemp = __instance.WorkItemStack.GetWorkableTemperature();
         if (!(temperature > workableTemp)) return;
-        var localizedString = Lang.Get("forge-contentsandtemp", __instance.Contents.StackSize,
-            __instance.Contents.GetName(), temperature);
+        var localizedString = Lang.Get("forge-contentsandtemp", __instance.WorkItemStack.StackSize,
+            __instance.WorkItemStack.GetName(), temperature);
         const string pattern = @"(\d+(.*)°C)";
         var replacement = Regex.Replace(localizedString, pattern,
             $"<font color=\"{Constants.AnvilWorkableColor}\">$1</font>");

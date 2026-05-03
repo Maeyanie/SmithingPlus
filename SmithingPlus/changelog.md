@@ -9,12 +9,8 @@
 - TODO [Major] Tool dismantling / tool head removal
 - TODO [MAJOR] Rework tool detection system to not use wildcard or cache it / regen it
 - TODO [Fix] Fix nugget recipes etc with better system
+- TODO [Feature] Add better quenching and tempering tooltips
 
-# v1.8.4
+# v1.9.0-dev.1
 
-Last version pre-1.22 update, from here only critical bug fixes for 1.21
-
-- **Fix**: Hopefully fix chisel crash once and for all (PR by `TheFifthRider`)
-- **Localisation**: Add Belarusian Localisation (thanks to `k1llo`)
-- **Compatibility**: Toolmold units are now server-authoritative, should fix XSkills incompatibility
-- **Fix**: Fix occasional crash when sending hammer tool mode (cannot find channel for some reason)
+- Updated to 1.22.0, some features might be unstable as not all edge cases have been tested.
