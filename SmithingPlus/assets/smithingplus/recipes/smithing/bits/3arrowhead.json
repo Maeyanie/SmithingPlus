@@ -29,6 +29,7 @@
       ]
     ],
     "name": "3 Arrowheads",
+    "code": "3arrowhead-{metal}",
     "output": {
       "type": "item",
       "code": "game:arrowhead-{metal}",

@@ -1,4 +1,5 @@
 #nullable enable
+using SmithingPlus.Common.Metal;
 using SmithingPlus.Metal;
 using SmithingPlus.Util;
 using Vintagestory.API.Common;

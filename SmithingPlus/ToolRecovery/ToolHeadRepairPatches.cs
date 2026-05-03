@@ -42,10 +42,11 @@ public class ToolHeadRepairPatches
     public static void Prefix_DamageItem(
         IWorldAccessor world,
         Entity byEntity,
-        ItemSlot itemslot,
-        int amount = 1)
+        ItemSlot itemSlot,
+        int amount = 1,
+        bool destroyOnZeroDurability = true)
     {
-        var itemstack = itemslot?.Itemstack;
+        var itemstack = itemSlot?.Itemstack;
         if (!(itemstack?.Collectible.HasBehavior<CollectibleBehaviorRepairableTool>() ?? false)) return;
         var brokenCount = itemstack.GetBrokenCount();
         if (brokenCount < 0) return;

@@ -173,7 +173,7 @@ public static class ItemStackExtensions
     {
         var gridRecipes =
             from recipe in api.World.GridRecipes
-            where recipe.Output?.ResolvedItemstack?.Satisfies(itemStack) == true
+            where recipe.Output?.ResolvedItemStack?.Satisfies(itemStack) == true
             select recipe;
         return gridRecipes;
     }

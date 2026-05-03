@@ -3,6 +3,7 @@
 using System;
 using HarmonyLib;
 using JetBrains.Annotations;
+using SmithingPlus.Common.Metal;
 using SmithingPlus.Metal;
 using SmithingPlus.Util;
 using Vintagestory.API.Common;

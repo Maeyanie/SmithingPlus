@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using SmithingPlus.Common.Metal;
+using SmithingPlus.Metal;
 using SmithingPlus.Util;
 using Vintagestory.API.Common;
 using Vintagestory.GameContent;
 
-namespace SmithingPlus.Metal;
+namespace SmithingPlus.Common.Metal;
 
 #nullable enable
 public static class MetalMaterialExtensions
@@ -27,7 +27,7 @@ public static class MetalMaterialExtensions
 
         // If that fails (coke oven door), try to get the variant from the smithing recipe
         var smithingRecipe = collObj.GetSmithingRecipe(api);
-        if (smithingRecipe is { Ingredient.ResolvedItemstack: var ingredientStack })
+        if (smithingRecipe is { Ingredient.ResolvedItemStack: { } ingredientStack })
         {
             var metalVariant = ingredientStack.Collectible.GetMetalVariant();
             metalMaterial = MetalMaterialLoader.GetMaterial(api, metalVariant);
@@ -37,9 +37,10 @@ public static class MetalMaterialExtensions
 
         // If that fails, check if the ingredient can be crafted into metal bits or similar
         var childRecipes = collObj.GetGridRecipesAsIngredient(api);
+        var gridRecipes = childRecipes as GridRecipe[] ?? childRecipes.ToArray();
         Debug.WriteLine(
-            $"[MetalMaterial] CollectibleObject {collObj.Code} has no metal material defined, trying to resolve from {childRecipes.Count()} recipes (as ingredient).");
-        if (TryGetMetalMaterialFromIngredients(api, childRecipes, out metalMaterial))
+            $"[MetalMaterial] CollectibleObject {collObj.Code} has no metal material defined, trying to resolve from {gridRecipes.Count()} recipes (as ingredient).");
+        if (TryGetMetalMaterialFromIngredients(api, gridRecipes, out metalMaterial))
             return metalMaterial;
 
         // If that fails, return null
@@ -77,11 +78,10 @@ public static class MetalMaterialExtensions
         foreach (var gridRecipe in gridRecipes)
         {
             var ingredients =
-                from ing in gridRecipe.resolvedIngredients
-                where ing is { ResolvedItemstack: not null } &&
-                      !ing.IsTool &&
-                      ing.ResolvedItemstack.Collectible != null
-                select ing.ResolvedItemstack.Collectible;
+                from ing in gridRecipe.RecipeIngredients
+                where ing is { ResolvedItemStack: not null, ConsumeProperties.Consume: false } || ing.ConsumeProperties.DurabilityCost == 0 &&
+                      ing.ResolvedItemStack?.Collectible != null
+                select ing.ResolvedItemStack?.Collectible;
             foreach (var ingredient in ingredients)
             {
                 if (ingredient == null) continue;
@@ -100,9 +100,9 @@ public static class MetalMaterialExtensions
             out metalMaterial);
     }
 
-    public static MetalMaterial? GetMetalMaterialSmelted(this CollectibleObject collectibleObject, ICoreAPI api)
+    public static MetalMaterial? GetMetalMaterialSmelted(this CollectibleObject? collectibleObject, ICoreAPI api)
     {
-        var variantCode = collectibleObject?.CombustibleProps?.SmeltedStack?.ResolvedItemstack.Collectible
+        var variantCode = collectibleObject?.CombustibleProps?.SmeltedStack?.ResolvedItemstack?.Collectible
             .GetMetalVariant();
         return variantCode == null ? null : MetalMaterialLoader.GetMaterial(api, variantCode);
     }
