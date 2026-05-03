@@ -7,14 +7,12 @@ using SmithingPlus.ClientTweaks;
 using SmithingPlus.Common;
 using SmithingPlus.Common.Metal;
 using SmithingPlus.Config;
-using SmithingPlus.Metal;
 using SmithingPlus.SmithWithBits;
 using SmithingPlus.StoneSmithing;
 using SmithingPlus.ToolRecovery;
 using SmithingPlus.Util;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
-using Vintagestory.API.Datastructures;
 using Vintagestory.API.Server;
 using Vintagestory.API.Util;
 using Vintagestory.GameContent;
@@ -115,16 +113,17 @@ public partial class Core : ModSystem
             var ingotCode = new AssetLocation("game:ingot-copper");
             var ingotRecipe = api.ModLoader.GetModSystem<RecipeRegistrySystem>().SmithingRecipes
                 .FirstOrDefault(r =>
-                    r.Ingredient.Code.Equals(ingotCode) &&
-                    r.Output.ResolvedItemstack.Collectible.Code.Equals(ingotCode));
-            if (ingotRecipe == null) continue;
+                    r.Ingredient?.Code?.Equals(ingotCode) == true &&
+                    r.Output.ResolvedItemstack?.Collectible.Code.Equals(ingotCode) == true);
+            if (ingotRecipe?.Ingredient == null) continue;
             if (!WildcardUtil.Match(Config.IngotSelector, collObj.Code.ToString())) continue;
             if (api.ModLoader.GetModSystem<RecipeRegistrySystem>().SmithingRecipes
-                .Any(r => r.Ingredient.Code.Equals(collObj.Code) &&
-                          r.Output.ResolvedItemstack.Collectible.Code.Equals(collObj.Code))) continue;
+                .Any(r => r.Ingredient?.Code?.Equals(collObj.Code) == true &&
+                          r.Output.ResolvedItemstack?.Collectible.Code.Equals(collObj.Code) == true)) continue;
             Logger.VerboseDebug($"Adding workable-only ingot recipe for {collObj.Code}");
             var newRecipe = new SmithingRecipe
             {
+                Code = ingotRecipe.Code + "-frombit",
                 Name = ingotRecipe.Name,
                 Pattern = ingotRecipe.Pattern,
                 Voxels = ingotRecipe.Voxels,

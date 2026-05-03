@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using SmithingPlus.Common.Metal;
-using SmithingPlus.Metal;
 using SmithingPlus.Util;
 using Vintagestory.API.Common;
 using Vintagestory.GameContent;
@@ -13,14 +12,14 @@ public class CollectibleBehaviorRecycledBit(CollectibleObject collObj) : Collect
     private ICoreAPI Api => collObj.GetField<ICoreAPI>("api");
 
     public override void OnCreatedByCrafting(
-        ItemSlot[] allInputslots,
+        ItemSlot[] allInputSlots,
         ItemSlot outputSlot,
         IRecipeBase byRecipe,
         ref EnumHandling bhHandling)
     {
-        base.OnCreatedByCrafting(allInputslots, outputSlot, byRecipe, ref bhHandling);
+        base.OnCreatedByCrafting(allInputSlots, outputSlot, byRecipe, ref bhHandling);
         if (outputSlot?.Itemstack == null ||
-            allInputslots == null)
+            allInputSlots == null)
             return;
 
         // Identify recipe tools from ingredients
@@ -30,7 +29,7 @@ public class CollectibleBehaviorRecycledBit(CollectibleObject collObj) : Collect
                 ing?.RecipeAttributes?[ModRecipeAttributes.RecyclingRecipe]?.AsBool() == true)
             .ToArray() ?? [];
 
-        var metalInputSlots = allInputslots
+        var metalInputSlots = allInputSlots
             .Where(s => s?.Itemstack != null)
             .Where(s => !IsToolStack(s.Itemstack, toolIngredients))
             .Where(s => s.Itemstack?.GetOrCacheMetalMaterial(Api)?.IngotStack != null)
@@ -59,7 +58,7 @@ public class CollectibleBehaviorRecycledBit(CollectibleObject collObj) : Collect
             else
             {
                 var cheapestRecipe = stack.GetCheapestSmithingRecipe(Api);
-                if (cheapestRecipe != null && cheapestRecipe.Output.ResolvedItemStack != null)
+                if (cheapestRecipe is { Output.ResolvedItemStack: not null })
                 {
                     var cheapestOutput = Math.Max(cheapestRecipe.Output.ResolvedItemStack.StackSize, 1);
                     var recipeMaterialVoxels = cheapestRecipe.Voxels.VoxelCount();
