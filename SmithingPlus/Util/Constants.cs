@@ -3,6 +3,7 @@ namespace SmithingPlus.Util;
 public static class Constants
 {
     internal const string AnvilWorkableColor = "#00A36C";
+    internal const string QuenchableColor = "darkcyan";
     internal const string Sp = "sp";
 }
 

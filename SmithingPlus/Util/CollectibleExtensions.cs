@@ -130,11 +130,12 @@ public static class CollectibleExtensions
         return (T)collObj.GetCollectibleBehavior(typeof(T), withInheritance);
     }
 
-    /*
-     Regex matching is slow.
-     Only use when first assigning behaviors.
-     At runtime, check for CollectibleBehaviorRepairableTool instead.
-    */
-
-    // Same as above, check for CollectibleBehaviorRepairableToolHead or CollectibleBehaviorCastToolHead instead
+    /// <summary>
+    ///     Gets the metal properties variant from a CollectibleBehaviorQuenchable behavior.
+    /// </summary>
+    public static CollectibleBehaviorQuenchable.MetalPropertyVariant? GetMetalProps(
+        this CollectibleBehaviorQuenchable behavior)
+    {
+        return behavior?.GetField<CollectibleBehaviorQuenchable.MetalPropertyVariant>("metalProps");
+    }
 }

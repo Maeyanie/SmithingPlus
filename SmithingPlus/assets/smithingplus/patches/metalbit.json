@@ -16,6 +16,17 @@
   },
   {
     "file": "game:itemtypes/resource/nugget.json",
+    "op": "move",
+    "frompath": "/behaviorsByType/*",
+    "path": "/smithingplustemp",
+    "side": "Server",
+    "condition": {
+      "when": "SmithingPlus_WorkableBits",
+      "isValue": "true"
+    }
+  },
+  {
+    "file": "game:itemtypes/resource/nugget.json",
     "op": "addMerge",
     "path": "/behaviorsByType",
     "value": {
@@ -39,6 +50,17 @@
         }
       ]
     },
+    "side": "Server",
+    "condition": {
+      "when": "SmithingPlus_WorkableBits",
+      "isValue": "true"
+    }
+  },
+  {
+    "file": "game:itemtypes/resource/nugget.json",
+    "op": "move",
+    "frompath": "/smithingplustemp",
+    "path": "/behaviorsByType/*",
     "side": "Server",
     "condition": {
       "when": "SmithingPlus_WorkableBits",

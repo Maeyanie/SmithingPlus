@@ -81,6 +81,10 @@ public partial class Core : ModSystem
                 api.Side == EnumAppSide.Client &&
                 Config.ShowWorkableTemperature &&
                 collObj.GetCollectibleInterface<IAnvilWorkable>() is not null);
+            collObj.AddBehaviorIf<CollectibleBehaviorQuenchableInfo>(
+                api.Side == EnumAppSide.Client &&
+                Config.ShowWorkableTemperature &&
+                collObj.HasBehavior<CollectibleBehaviorQuenchable>());
             collObj.AddBehaviorIf<CollectibleBehaviorScrapeCrucible>(Config.RecoverBitsOnSplit &&
                                                                      collObj is ItemChisel);
             collObj.AddBehaviorIf<CollectibleBehaviorSmeltedContainer>(Config.RecoverBitsOnSplit &&
