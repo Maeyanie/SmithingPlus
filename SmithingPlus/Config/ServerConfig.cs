@@ -13,7 +13,7 @@ public class ServerConfig
     public bool BitsTopUp { get; set; } = true;
     public bool EnableToolRecovery { get; set; } = true;
     public float DurabilityPenaltyPerRepair { get; set; } = 0.05f;
-    public string ToolRepairForgettableAttributes { get; set; } = "quality,maxRepair";
+    public string ToolRepairForgettableAttributes { get; set; } = "quality,maxRepair,buffs";
     public float RepairableToolDurabilityMultiplier { get; set; } = 1.0f;
     public float BrokenToolVoxelPercent { get; set; } = 0.8f;
 

@@ -11,6 +11,6 @@
 - TODO [Fix] Fix nugget recipes etc with better system
 - TODO [Feature] Add better quenching and tempering tooltips
 
-# v1.9.0-dev.1
+# v1.9.0-dev.2
 
-- Updated to 1.22.0, some features might be unstable as not all edge cases have been tested.
+- **Fix**: Fix handbook crash with null drop itemstack attribute in certain mold items
