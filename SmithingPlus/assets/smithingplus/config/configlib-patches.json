@@ -1,5 +1,5 @@
 {
-  "version": 10,
+  "version": 11,
   "file": "SmithingPlus.json",
   "patches": {},
   "settings": [
@@ -83,7 +83,7 @@
       "type": "string",
       "weight": 1.4,
       "comment": "smithingplus:setting-toolrepairforgettableattributes-desc",
-      "default": "quality,maxRepair"
+      "default": "quality,maxRepair,buffs"
     },
     {
       "code": "RepairableToolDurabilityMultiplier",

@@ -30,7 +30,8 @@ public partial class HandbookInfoPatch
     private static ItemStack GetStackForVariant(ICoreClientAPI capi, ItemStack moldStack, string metalVariant)
     {
         var mold = moldStack.Collectible;
-        var jstack = mold.Attributes["drop"]?.AsObject<JsonItemStack>(null, mold.Code.Domain).Clone();
+        var jstack = mold.Attributes["drop"]?.AsObject<JsonItemStack>(null, mold.Code.Domain)?.Clone();
+        if (jstack == null) return null;
         var toolVariant = mold.LastCodePart();
         jstack.Code.Path = jstack.Code.Path.Replace("{tooltype}", toolVariant).Replace("{metal}", metalVariant);
         jstack.Resolve(capi.World, "tool mold drop for " + mold.Code, false);
@@ -39,7 +40,12 @@ public partial class HandbookInfoPatch
 
     public static string ToolMoldType(CollectibleObject mold)
     {
-        var jstack = mold.Attributes["drop"].AsObject<JsonItemStack>(null, mold.Code.Domain);
+        var dropAttr = mold.Attributes?["drop"];
+        if (dropAttr == null) return mold.LastCodePart();
+
+        var jstack = dropAttr.AsObject<JsonItemStack>(null, mold.Code.Domain);
+        if (jstack?.Code == null) return mold.LastCodePart();
+
         return jstack.Code.Path.Contains("{tooltype}") ? mold.LastCodePart() : jstack.Code.FirstCodePart();
     }
 

@@ -14,3 +14,4 @@
 # v1.9.0-dev.2
 
 - **Fix**: Fix handbook crash with null drop itemstack attribute in certain mold items
+- **Tweak**: Remove tool buffs (sharpening, etc) on repair. Can be adjusted in config "ToolRepairForgettableAttributes".
