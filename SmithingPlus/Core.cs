@@ -123,7 +123,7 @@ public partial class Core : ModSystem
             Logger.VerboseDebug($"Adding workable-only ingot recipe for {collObj.Code}");
             var newRecipe = new SmithingRecipe
             {
-                Code = ingotRecipe.Code + "-frombit",
+                Code = new AssetLocation(ModId, collObj.Code.Path + "-to-itself"),
                 Name = ingotRecipe.Name,
                 Pattern = ingotRecipe.Pattern,
                 Voxels = ingotRecipe.Voxels,

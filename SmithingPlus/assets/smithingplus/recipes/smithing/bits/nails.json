@@ -30,6 +30,7 @@
       ]
     ],
     "name": "1 set of nails",
+    "code": "1nails-{metal}",
     "output": {
       "type": "item",
       "code": "game:metalnailsandstrips-{metal}",

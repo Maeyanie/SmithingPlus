@@ -29,6 +29,7 @@
       ]
     ],
     "name": "1 Arrowhead",
+    "code": "1arrowhead-{metal}",
     "output": {
       "type": "item",
       "code": "game:arrowhead-{metal}",

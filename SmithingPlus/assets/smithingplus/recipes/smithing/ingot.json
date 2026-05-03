@@ -22,6 +22,7 @@
       ]
     ],
     "name": "Ingot",
+    "code": "ingot-copper",
     "output": {
       "type": "item",
       "code": "game:ingot-copper"
