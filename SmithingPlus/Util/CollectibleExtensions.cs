@@ -99,6 +99,7 @@ public static class CollectibleExtensions
                 var code = ing?.ResolvedItemStack?.Collectible?.Code;
                 if (code == null) continue;
                 if (!dict.TryGetValue(code, out var list)) dict[code] = list = [];
+                // Prevent duplicate entries when a recipe has the same ingredient multiple times
                 if (list.Count == 0 || list[^1] != recipe) list.Add(recipe);
             }
 
